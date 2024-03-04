@@ -7,8 +7,17 @@ import PaymentMethods.Visa;
 
 import java.util.Scanner;
 
+/**
+ * The Main class represents the entry point of the payment terminal application.
+ */
 public class Main {
 
+    /**
+     * The main method initializes a payment terminal, adds payment methods,
+     * and processes payments based on user input.
+     *
+     * @param args The command-line arguments (not used in this application).
+     */
     public static void main(String[] args) {
         PaymentTerminal terminal = new PaymentTerminal();
         terminal.addPaymentMethod(new Visa(1000));
@@ -43,6 +52,12 @@ public class Main {
         scanner.close();
     }
 
+    /**
+     * Checks if the amount has more than two decimal places.
+     *
+     * @param amount The amount to check.
+     * @throws IllegalArgumentException If the number of decimal places exceeds 2.
+     */
     public static void CheckAmount(double amount) throws IllegalArgumentException {
 
         String[] parts = String.valueOf(amount).split("\\.");
