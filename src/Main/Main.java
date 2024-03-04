@@ -1,4 +1,9 @@
+package Main;
 
+import PaymentMethods.Cryptocurrency;
+import PaymentMethods.MasterCard;
+import PaymentMethods.NFC;
+import PaymentMethods.Visa;
 
 import java.util.Scanner;
 
@@ -27,6 +32,7 @@ public class Main {
                 if (amount < 0) {
                     throw new IllegalArgumentException("Payment amount cannot be negative.");
                 }
+                CheckAmount(amount);
                 terminal.processPayment(amount);
             } catch (NumberFormatException e) {
                 System.out.println("Invalid input. Please enter a valid amount or 'exit' to quit.");
@@ -34,8 +40,15 @@ public class Main {
                 System.out.println(e.getMessage());
             }
         }
-
         scanner.close();
+    }
+
+    public static void CheckAmount(double amount) throws IllegalArgumentException {
+
+        String[] parts = String.valueOf(amount).split("\\.");
+        if (parts.length > 1 && parts[1].length() > 2) {
+            throw new IllegalArgumentException("The number of decimal places cannot exceed 2");
+        }
     }
 
 }

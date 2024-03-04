@@ -1,8 +1,12 @@
-public class NFC implements IPayment {
+package PaymentMethods;
+
+import Main.IPayment;
+
+public class Cryptocurrency implements IPayment {
 
     private double balance;
 
-    public NFC(double balance) {
+    public Cryptocurrency(double balance) {
         this.balance = balance;
     }
 
@@ -10,11 +14,11 @@ public class NFC implements IPayment {
     public void pay(double amount) {
         if (amount <= balance) {
             balance -= amount;
-            System.out.println("Payment successful with method NFC");
+            System.out.println("Payment successful with method PaymentMethods.Cryptocurrency");
         } else {
             System.out.println("Insufficient funds...");
         }
-        System.out.println("Now in NFC you have: " + balance + "$");
+        System.out.println("Now in PaymentMethods.Cryptocurrency you have: " + balance + "$");
     }
 
     @Override

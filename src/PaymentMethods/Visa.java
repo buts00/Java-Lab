@@ -1,8 +1,13 @@
-public class MasterCard implements IPayment {
+package PaymentMethods;
+
+
+import Main.IPayment;
+
+public class Visa implements IPayment {
 
     private double balance;
 
-    public MasterCard(double balance) {
+    public Visa(double balance) {
         this.balance = balance;
     }
 
@@ -10,11 +15,11 @@ public class MasterCard implements IPayment {
     public void pay(double amount) {
         if (amount <= balance) {
             balance -= amount;
-            System.out.println("Payment successful with method MasterCard");
+            System.out.println("Payment successful with method PaymentMethods.Visa");
         } else {
             System.out.println("Insufficient funds...");
         }
-        System.out.println("Now in MasterCard you have: " + balance + "$");
+        System.out.println("Now in PaymentMethods.Visa you have: " + balance + "$");
     }
 
     @Override
