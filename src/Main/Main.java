@@ -1,69 +1,130 @@
+/**
+ * The Main class is responsible for initializing the game, prompting the user to select weapons and armor for the player and the bot,
+ * and managing the game loop where the player and bot take turns attacking or defending.
+ */
 package Main;
 
-import PaymentMethods.Cryptocurrency;
-import PaymentMethods.MasterCard;
-import PaymentMethods.NFC;
-import PaymentMethods.Visa;
+import Players.Bot;
+import Players.Player;
+import typeOfArmors.Armor;
+import typeOfArmors.HeavyArmor;
+import typeOfArmors.LightArmor;
+import typeOfWeapons.Bow;
+import typeOfWeapons.Sword;
+import typeOfWeapons.Weapon;
 
 import java.util.Scanner;
 
-/**
- * The Main class represents the entry point of the payment terminal application.
- */
 public class Main {
 
     /**
-     * The main method initializes a payment terminal, adds payment methods,
-     * and processes payments based on user input.
-     *
-     * @param args The command-line arguments (not used in this application).
+     * The class responsible for tracking and displaying game statistics.
+     * This class is a private static inner class of the Main class.
      */
-    public static void main(String[] args) {
-        PaymentTerminal terminal = new PaymentTerminal();
-        terminal.addPaymentMethod(new Visa(1000));
-        terminal.addPaymentMethod(new MasterCard(2000));
-        terminal.addPaymentMethod(new NFC(3000));
-        terminal.addPaymentMethod(new Cryptocurrency(4000));
+    private static class GameStats {
+        public static void display() {
+            System.out.println("Виводимо статистику гри...");
 
-        Scanner scanner = new Scanner(System.in);
-
-        while (true) {
-            System.out.println("Enter payment amount (or type 'exit' to quit): ");
-            String input = scanner.nextLine();
-
-            if (input.equalsIgnoreCase("exit")) {
-                System.out.println("Exiting...");
-                break;
-            }
-
-            try {
-                double amount = Double.parseDouble(input);
-                if (amount < 0) {
-                    throw new IllegalArgumentException("Payment amount cannot be negative.");
-                }
-                CheckAmount(amount);
-                terminal.processPayment(amount);
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid input. Please enter a valid amount or 'exit' to quit.");
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-            }
         }
-        scanner.close();
     }
 
     /**
-     * Checks if the amount has more than two decimal places.
+     * The main method of the program where the game is initialized and managed.
      *
-     * @param amount The amount to check.
-     * @throws IllegalArgumentException If the number of decimal places exceeds 2.
+     * @param args The command-line arguments passed to the program.
      */
-    public static void CheckAmount(double amount) throws IllegalArgumentException {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
 
-        String[] parts = String.valueOf(amount).split("\\.");
-        if (parts.length > 1 && parts[1].length() > 2) {
-            throw new IllegalArgumentException("The number of decimal places cannot exceed 2");
+        Weapon playerWeapon;
+        Armor playerArmor;
+        Weapon botWeapon;
+        Armor botArmor;
+
+        // Prompt the user to select weapons and armor for both the player and the bot
+        do {
+            System.out.println("Choose the player's weapon (sword/bow):");
+            String playerWeaponChoice = scanner.nextLine();
+            if (playerWeaponChoice.equals("sword")) {
+                playerWeapon = new Sword();
+            } else if (playerWeaponChoice.equals("bow")) {
+                playerWeapon = new Bow();
+            } else {
+                System.out.println("Invalid input. Please enter 'sword' or 'bow'.");
+                continue;
+            }
+
+            System.out.println("Choose the player's armor (light/heavy):");
+            String playerArmorChoice = scanner.nextLine();
+            if (playerArmorChoice.equals("light")) {
+                playerArmor = new LightArmor();
+            } else if (playerArmorChoice.equals("heavy")) {
+                playerArmor = new HeavyArmor();
+            } else {
+                System.out.println("Invalid input. Please enter 'light' or 'heavy'.");
+                continue;
+            }
+
+
+            System.out.println("Choose the bot's weapon (sword/bow):");
+            String botWeaponChoice = scanner.nextLine();
+            if (botWeaponChoice.equals("sword")) {
+                botWeapon = new Sword();
+            } else if (botWeaponChoice.equals("bow")) {
+                botWeapon = new Bow();
+            } else {
+                System.out.println("Invalid input. Please enter 'sword' or 'bow'.");
+                continue;
+            }
+
+            System.out.println("Choose the bot's armor (light/heavy):");
+            String botArmorChoice = scanner.nextLine();
+            if (botArmorChoice.equals("light")) {
+                botArmor = new LightArmor();
+            } else if (botArmorChoice.equals("heavy")) {
+                botArmor = new HeavyArmor();
+            } else {
+                System.out.println("Invalid input. Please enter 'light' or 'heavy'.");
+                continue;
+            }
+            break;
+        } while (true);
+
+        // Initialize the player and the bot with the chosen weapons and armor
+        Player player = new Player(playerWeapon, playerArmor);
+        Bot bot = new Bot(botWeapon, botArmor);
+
+        // Start the game
+        System.out.println("The game has started!");
+
+        // Game loop where the player and the bot take turns attacking or defending
+        while (true) {
+            System.out.println("Enter a command (attack/defend/exit):");
+            String command = scanner.nextLine();
+
+            switch (command) {
+                case "attack" -> {
+                    player.attack();
+                    bot.attack();
+                }
+                case "defend" -> {
+                    player.defend();
+                    bot.defend();
+                }
+                case "exit" -> {
+                    class GameOverMessage {
+                        void display() {
+                            System.out.println("Гра закінчена. Дякую за гру!");
+                        }
+                    }
+
+                    GameOverMessage message = new GameOverMessage();
+                    message.display();
+                    GameStats.display();
+                    System.exit(0);
+                }
+                default -> System.out.println("Невідома команда.");
+            }
         }
     }
-
 }
