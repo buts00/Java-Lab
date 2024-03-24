@@ -1,32 +1,23 @@
-# Lab 13
+**Battle Game Swing Application (lab 14)**
 
-## Description
-This project is a simple text-based game implemented in Java. It allows players to control a character and engage in battles with a bot. Players can choose their weapons and armor, and then take turns attacking or defending against the bot.
+This is a Swing application that modifies a previously created game to be displayed using a graphical user interface (GUI) instead of console output.
 
-## Features
-- Player can choose between a sword or a bow as their weapon.
-- Player can choose between light or heavy armor for protection.
-- Bot also selects its weapon and armor randomly.
-- Players and bots take turns attacking or defending.
-- Game continues until the player decides to exit.
+### Features
+- The game allows players to engage in a battle where they attack each other, reducing each other's health.
+- The game continues until one of the players' health reaches zero or below.
+- The GUI provides text fields for entering the initial health of the player and the bot, as well as buttons for attacking each player.
+- Health updates are displayed dynamically in the GUI.
+- Provides a mini-help section and information about the author.
 
-## What I Learned
-- Implemented a text-based game using object-oriented programming principles in Java.
-- Utilized inheritance to create subclasses for different types of weapons and armor.
-- Learned how to use polymorphism by overriding methods in subclasses to provide specialized functionality.
-- Practiced handling user input and validation using the Scanner class.
-- Gained experience in managing game logic within a loop, including turn-based gameplay and condition checking.
-- Enhanced my understanding of modular programming by organizing code into separate packages and classes.
+### How to Run
+To run the Battle Game Swing Application:
+1. Ensure you have Java installed on your system.
+2. Compile the Java files.
+3. Run the `GameGUI` class, which contains the main method.
 
-
-## Installation
-1. Clone the repository to your local machine.
-2. Ensure you have Java installed on your system.
-3. Compile the Main.java file using the Java compiler.
-4. Run the compiled Main.class file to start the game.
-
-## Usage
-- Upon starting the game, follow the prompts to choose your weapon and armor.
-- Enter commands to attack, defend, or exit the game.
-
+### Controls
+- Enter the initial health of the player and the bot in the respective text fields.
+- Click the "Start" button to begin the game.
+- Click the "Attack Player" button to attack the player.
+- Click the "Attack Bot" button to attack the bot.
 
