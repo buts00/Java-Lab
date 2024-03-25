@@ -1,23 +1,18 @@
-**Battle Game Swing Application (lab 14)**
+# Геометричні обчислення
 
-This is a Swing application that modifies a previously created game to be displayed using a graphical user interface (GUI) instead of console output.
+Цей проєкт - простий додаток для обчислення площі різних геометричних фігур, таких як трикутник, квадрат і коло. Він написаний на Java з використанням бібліотеки Swing для створення графічного інтерфейсу користувача.
 
-### Features
-- The game allows players to engage in a battle where they attack each other, reducing each other's health.
-- The game continues until one of the players' health reaches zero or below.
-- The GUI provides text fields for entering the initial health of the player and the bot, as well as buttons for attacking each player.
-- Health updates are displayed dynamically in the GUI.
-- Provides a mini-help section and information about the author.
+## Опис
 
-### How to Run
-To run the Battle Game Swing Application:
-1. Ensure you have Java installed on your system.
-2. Compile the Java files.
-3. Run the `GameGUI` class, which contains the main method.
+Програма має головне вікно, де ви можете вибрати фігуру для обчислення площі з випадаючого меню "Фігури". Доступні фігури:
 
-### Controls
-- Enter the initial health of the player and the bot in the respective text fields.
-- Click the "Start" button to begin the game.
-- Click the "Attack Player" button to attack the player.
-- Click the "Attack Bot" button to attack the bot.
+- Трикутник
+- Квадрат
+- Коло
+
+Кожна фігура відкривається у власному внутрішньому вікні, де користувач може ввести необхідні параметри (наприклад, довжину сторін трикутника або радіус кола) і обчислити площу. Результат обчислення відображається у діалоговому вікні.
+
+## Встановлення
+
+Для запуску програми вам потрібно мати встановлену Java на вашому комп'ютері. Просто скомпілюйте і запустіть файл `Main.java`.
 
